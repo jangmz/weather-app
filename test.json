@@ -1,0 +1,22 @@
+{
+    "current": {
+        "condition": {
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+            "text": "Partly cloudy"
+        },
+        "feelslike_c": 8,
+        "feelslike_f": 46.5,
+        "humidity": 87,
+        "last-updated": "2024-02-13 12:30",
+        "temp_c": 8,
+        "temp_f": 46.4,
+        "uv": 3,
+        "wind_kph": 3.6,
+        "wind_mph": 2.2
+    },
+    "location": {
+        "country": "Slovenia",
+        "name": "Ljubljana",
+        "region": "Bohinj"
+    }
+}

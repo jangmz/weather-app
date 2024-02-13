@@ -1,10 +1,20 @@
 import "./styles/main.css";
 
+async function weatherFetch(location) {
+    const weatherPromise = await fetch(`https://api.weatherapi.com/v1/current.json?key=fd8dc2d5fda54d06a95141222240102&q=${location}`, { mode: "cors" });
+    const weatherData = await weatherPromise.json();
+    
+    console.log(weatherData);
+    console.log(`Weather in ${location}, ${weatherData.location.country}: ${weatherData.current.condition.text} (${weatherData.current.temp_c}˚C)`);
+}
+
+weatherFetch("Ljubljana");
+
 
 /*
 
-[] Set up a blank HTML document with the appropriate links to your JavaScript and CSS files.
-[] Write the functions that hit the API. You’re going to want functions that can 
+[x] Set up a blank HTML document with the appropriate links to your JavaScript and CSS files.
+[x] Write the functions that hit the API. You’re going to want functions that can 
     take a location and return the weather data for that location. For now, just console.log() 
     the information.
 [] Write the functions that process the JSON data you’re getting from the API and return 
