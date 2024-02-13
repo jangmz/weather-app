@@ -17,6 +17,7 @@
     "location": {
         "country": "Slovenia",
         "name": "Ljubljana",
-        "region": "Bohinj"
+        "region": "Bohinj",
+        "tz_id": "Europe/Ljubljana"
     }
 }
