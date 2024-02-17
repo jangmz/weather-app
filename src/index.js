@@ -1,4 +1,5 @@
 import "./styles/main.css";
+import "./eventListeners.js";
 
 class WeatherInfo {
     constructor(city, country, timezone, tempC, tempF, humidity, lastUpdated, uv, conditionText, icon, windSpeedKMH, windSpeedMPH) {
@@ -33,8 +34,8 @@ function parseWeatherData(data) {
         data.current.wind_mph
         )
 
-    console.log("Object created:");
-    console.log(weatherDataObj);
+    //console.log("Object created");
+    //console.log(weatherDataObj);
     
     return weatherDataObj;
 }
@@ -44,11 +45,15 @@ async function weatherFetch(location) {
     const weatherJson = await weatherPromise.json();
     const weatherData = parseWeatherData(weatherJson);
     
-    //console.log(weatherData);
+    console.log(weatherData);
     //console.log(`Weather in ${weatherData.location.name}, ${weatherData.location.country}: ${weatherData.current.condition.text} (${weatherData.current.temp_c}˚C)`);
 }
 
-weatherFetch("Ljubljana");
+export function userLocationInput(location) {
+    weatherFetch(location);
+}
+
+//weatherFetch("nova gorica");
 
 
 /*
@@ -57,7 +62,7 @@ weatherFetch("Ljubljana");
 [x] Write the functions that hit the API. You’re going to want functions that can 
     take a location and return the weather data for that location. For now, just console.log() 
     the information.
-[] Write the functions that process the JSON data you’re getting from the API and return 
+[x] Write the functions that process the JSON data you’re getting from the API and return 
     an object with only the data you require for your app.
     Data needed: 
         -Country, location
@@ -68,7 +73,7 @@ weatherFetch("Ljubljana");
         -uv index
         -condition text & icon
         -wind speed in kmh and mph
-[] Set up a form that will let users input their location and will fetch the weather info 
+[x] Set up a form that will let users input their location and will fetch the weather info 
     (still just console.log() it).
 [] Display the information on your webpage!
 [] Add any styling you like!
