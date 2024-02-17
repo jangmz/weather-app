@@ -1,5 +1,7 @@
 import "./styles/main.css";
 import "./eventListeners.js";
+import "./dom.js";
+import { displayWeatherData } from "./dom.js";
 
 class WeatherInfo {
     constructor(city, country, timezone, tempC, tempF, humidity, lastUpdated, uv, conditionText, icon, windSpeedKMH, windSpeedMPH) {
@@ -46,11 +48,14 @@ async function weatherFetch(location) {
     const weatherData = parseWeatherData(weatherJson);
     
     console.log(weatherData);
-    //console.log(`Weather in ${weatherData.location.name}, ${weatherData.location.country}: ${weatherData.current.condition.text} (${weatherData.current.temp_c}˚C)`);
+    console.log("Finished fetching");
+
+    return weatherData;
 }
 
-export function userLocationInput(location) {
-    weatherFetch(location);
+export async function userLocationInput(location) {
+    displayWeatherData(await weatherFetch(location));
+    console.log("Finished displaying");
 }
 
 //weatherFetch("nova gorica");
