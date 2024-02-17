@@ -1,11 +1,51 @@
 import "./styles/main.css";
 
+class WeatherInfo {
+    constructor(city, country, timezone, tempC, tempF, humidity, lastUpdated, uv, conditionText, icon, windSpeedKMH, windSpeedMPH) {
+        this.city = city,
+        this.country = country,
+        this.timezone = timezone,
+        this.tempC = tempC,
+        this.tempF = tempF,
+        this.humidity = humidity,
+        this.lastUpdated = lastUpdated,
+        this.uv = uv,
+        this.conditionText = conditionText,
+        this.icon = icon,
+        this.windSpeedKMH = windSpeedKMH,
+        this.windSpeedMPH = windSpeedMPH
+    }
+}
+
+function parseWeatherData(data) {
+    const weatherDataObj = new WeatherInfo(
+        data.location.name,
+        data.location.country,
+        data.location.tz_id,
+        data.current.temp_c,
+        data.current.temp_f,
+        data.current.humidity,
+        data.current.last_updated,
+        data.current.uv,
+        data.current.condition.text,
+        data.current.condition.icon,
+        data.current.wind_kph,
+        data.current.wind_mph
+        )
+
+    console.log("Object created:");
+    console.log(weatherDataObj);
+    
+    return weatherDataObj;
+}
+
 async function weatherFetch(location) {
     const weatherPromise = await fetch(`https://api.weatherapi.com/v1/current.json?key=fd8dc2d5fda54d06a95141222240102&q=${location}`, { mode: "cors" });
-    const weatherData = await weatherPromise.json();
+    const weatherJson = await weatherPromise.json();
+    const weatherData = parseWeatherData(weatherJson);
     
-    console.log(weatherData);
-    console.log(`Weather in ${weatherData.location.name}, ${weatherData.location.country}: ${weatherData.current.condition.text} (${weatherData.current.temp_c}˚C)`);
+    //console.log(weatherData);
+    //console.log(`Weather in ${weatherData.location.name}, ${weatherData.location.country}: ${weatherData.current.condition.text} (${weatherData.current.temp_c}˚C)`);
 }
 
 weatherFetch("Ljubljana");
@@ -23,7 +63,6 @@ weatherFetch("Ljubljana");
         -Country, location
         -timezone
         -temperature in C and F
-        -feels like in C and F
         -humidity
         -last updated
         -uv index
