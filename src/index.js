@@ -58,9 +58,6 @@ export async function userLocationInput(location) {
     console.log("Finished displaying");
 }
 
-//weatherFetch("nova gorica");
-
-
 /*
 
 [x] Set up a blank HTML document with the appropriate links to your JavaScript and CSS files.
@@ -85,5 +82,7 @@ export async function userLocationInput(location) {
 [] Optional: add a ‘loading’ component that displays from the time the form is 
     submitted until the information comes back from the API. Use DevTools to test 
     for low-end devices.
+[] handle errors (mistyped city names, or if city not found, wrong inputs,...)
+[] add gif regarding the weather
 
 */

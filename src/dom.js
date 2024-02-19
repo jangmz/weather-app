@@ -1,6 +1,15 @@
 export function displayWeatherData(location) {
     console.log(`Display weather data for: ${location}`);
+
     const weatherDiv = document.querySelector("#weather-data");
+
+    if (weatherDiv.style.display === "") {
+        weatherDiv.style.display = "block";
+    }
+
+    // clear current div
+    clearSubElements(weatherDiv);
+
     const cityCountry = document.createElement("h1");
     const timeZone = document.createElement("p");
     const tempC = document.createElement("h2");
@@ -11,6 +20,7 @@ export function displayWeatherData(location) {
     const windSpeedK = document.createElement("p");
     const windSpeedM = document.createElement("p");
 
+    // set text
     cityCountry.textContent = `${location.city} (${location.country})`;
     timeZone.textContent = location.timeZone;
     tempC.textContent = `Temperature: ${location.tempC}˚C`;
@@ -21,6 +31,13 @@ export function displayWeatherData(location) {
     windSpeedK.textContent = `Wind speed: ${location.windSpeedKMH} km/h`;
     windSpeedM.textContent = `Wind speed: ${location.windSpeedMPH} m/h`;
 
+    // set css classes
+    if (location.tempC >= 20) {
+        weatherDiv.classList = "weather-data-hot";
+    } else {
+        weatherDiv.classList = "weather-data-cold";
+    }
+
     weatherDiv.appendChild(cityCountry);
     weatherDiv.appendChild(timeZone);
     weatherDiv.appendChild(conditionText);
@@ -29,3 +46,9 @@ export function displayWeatherData(location) {
     weatherDiv.appendChild(uv);
     weatherDiv.appendChild(windSpeedK);
 }
+
+function clearSubElements(parentElement) {
+    while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild);
+    }
+}  
