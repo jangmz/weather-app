@@ -80,7 +80,7 @@ export async function userLocationInput(location) {
         -wind speed in kmh and mph
 [x] Set up a form that will let users input their location and will fetch the weather info 
     (still just console.log() it).
-[] Display the information on your webpage!
+[x] Display the information on your webpage!
 [] Add any styling you like!
 [] Optional: add a ‘loading’ component that displays from the time the form is 
     submitted until the information comes back from the API. Use DevTools to test 
