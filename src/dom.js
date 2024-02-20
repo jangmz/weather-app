@@ -5,25 +5,36 @@ export function displayWeatherData(location) {
     const weatherDiv = document.querySelector("#weather-data");
 
     if (weatherDiv.style.display === "") {
-        weatherDiv.style.display = "block";
+        weatherDiv.style.display = "grid"; // none
     }
 
     // clear current div
     clearSubElements(weatherDiv);
 
-    const cityCountry = document.createElement("h1");
-    const timeZone = document.createElement("p");
-    const tempC = document.createElement("h2");
-    const tempF = document.createElement("h2");
-    const conditionText = document.createElement("h2");
+    const cityCountry = document.createElement("div");
+    const timeZone = document.createElement("div");
+    const tempC = document.createElement("div");
+    const tempF = document.createElement("div");
+    const conditionText = document.createElement("div");
     const icon = document.createElement("img");
-    const uv = document.createElement("p");
-    const windSpeedK = document.createElement("p");
-    const windSpeedM = document.createElement("p");
+    const uv = document.createElement("div");
+    const windSpeedK = document.createElement("div");
+    const windSpeedM = document.createElement("div");
+
+    // set IDs
+    cityCountry.id = "city-country";
+    timeZone.id = "time-zone";
+    tempC.id = "temp-c";
+    tempF.id = "temp-f";
+    conditionText.id = "conditions";
+    icon.id = "icon";
+    uv.id = "uv";
+    windSpeedK.id = "windspeed-kmh";
+    windSpeedM.id = "windspeed-mph";
 
     // set text
     cityCountry.textContent = `${location.city} (${location.country})`;
-    timeZone.textContent = location.timeZone;
+    timeZone.textContent = location.timezone;
     tempC.textContent = `Temperature: ${location.tempC}˚C`;
     tempF.textContent = `Temperature: ${location.tempF}˚F`;
     conditionText.textContent = location.conditionText;
