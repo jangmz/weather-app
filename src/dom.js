@@ -4,6 +4,7 @@ export function displayWeatherData(location) {
     const pageBody = document.body;
     const weatherDiv = document.querySelector("#weather-data");
 
+    // change weather data div to visible
     if (weatherDiv.style.display === "") {
         weatherDiv.style.display = "grid"; // none
     }
@@ -11,6 +12,7 @@ export function displayWeatherData(location) {
     // clear current div
     clearSubElements(weatherDiv);
 
+    // creating all elements
     const cityCountry = document.createElement("div");
     const timeZone = document.createElement("div");
     const tempC = document.createElement("div");
@@ -52,6 +54,7 @@ export function displayWeatherData(location) {
         pageBody.classList = "cold";
     }
 
+    // adding elements to the page
     weatherDiv.appendChild(cityCountry);
     weatherDiv.appendChild(timeZone);
     weatherDiv.appendChild(conditionText);
@@ -59,6 +62,10 @@ export function displayWeatherData(location) {
     weatherDiv.appendChild(tempC);
     weatherDiv.appendChild(uv);
     weatherDiv.appendChild(windSpeedK);
+}
+
+export function displayError(error) {
+    console.log(error);
 }
 
 function clearSubElements(parentElement) {

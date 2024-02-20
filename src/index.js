@@ -1,7 +1,7 @@
 import "./styles/main.css";
 import "./eventListeners.js";
 import "./dom.js";
-import { displayWeatherData } from "./dom.js";
+import { displayWeatherData, displayError } from "./dom.js";
 
 class WeatherInfo {
     constructor(city, country, timezone, tempC, tempF, humidity, lastUpdated, uv, conditionText, icon, windSpeedKMH, windSpeedMPH) {
@@ -40,8 +40,26 @@ function parseWeatherData(data) {
 }
 
 async function weatherFetch(location) {
-    const weatherPromise = await fetch(`https://api.weatherapi.com/v1/current.json?key=fd8dc2d5fda54d06a95141222240102&q=${location}`, { mode: "cors" });
-    const weatherJson = await weatherPromise.json();
+    let weatherPromise, weatherJson;
+
+    // fetching api
+    try {
+        weatherPromise = await fetch(`https://api.weatherapi.com/v1/current.json?key=fd8dc2d5fda54d06a95141222240102&q=${location}`, { mode: "cors" });
+    } catch(error) {
+        // call a function in dom.js and pass it the error so it can be displayed on the page
+        console.log(error);
+        displayError(error);
+    }
+
+    // getting json file
+    try {
+        weatherJson = await weatherPromise.json();
+    } catch(error) {
+        // call a function in dom.js and pass it the error so it can be displayed on the page
+        console.log(error);
+        displayError(error);
+    }
+    
     const weatherData = parseWeatherData(weatherJson);
     
     console.log(weatherData);
@@ -76,7 +94,7 @@ export async function userLocationInput(location) {
 [x] Set up a form that will let users input their location and will fetch the weather info 
     (still just console.log() it).
 [x] Display the information on your webpage!
-[] Add any styling you like!
+[x] Add any styling you like!
 [] Optional: add a ‘loading’ component that displays from the time the form is 
     submitted until the information comes back from the API. Use DevTools to test 
     for low-end devices.
