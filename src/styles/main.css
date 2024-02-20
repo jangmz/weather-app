@@ -41,4 +41,52 @@ body {
 #city-country {
     grid-column: 1 / 4;
     justify-self: center;
+    align-self: center;
+
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+#time-zone {
+    grid-column: 4 / -1;
+    justify-self: end;
+    align-self: center;
+
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+#icon {
+    grid-column: 1 / 2;
+    grid-row: 2 / 5;
+    justify-self: center;
+    align-self: center;
+}
+
+#temp-c,
+#temp-f {
+    grid-column: 2 / 3;
+    grid-row: 2 / 5;
+    justify-self: center;
+    align-self: center;
+}
+
+#conditions {
+    grid-column: 4 / -1;
+    grid-row: 2 / 3;
+    justify-self: end;
+}
+
+#uv {
+    grid-column: 4 / -1;
+    grid-row: 3 / 4;
+    justify-self: end;
+}
+
+#windspeed-kmh,
+#windspeed-mph {
+    grid-column: 4 / -1;
+    grid-row: 4 / 5;
+    justify-self: end;
 }
