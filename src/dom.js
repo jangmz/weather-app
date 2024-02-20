@@ -1,6 +1,7 @@
 export function displayWeatherData(location) {
     console.log(`Display weather data for: ${location}`);
 
+    const pageBody = document.body;
     const weatherDiv = document.querySelector("#weather-data");
 
     if (weatherDiv.style.display === "") {
@@ -33,9 +34,9 @@ export function displayWeatherData(location) {
 
     // set css classes
     if (location.tempC >= 20) {
-        weatherDiv.classList = "weather-data-hot";
+        pageBody.classList = "hot-n-sunny";
     } else {
-        weatherDiv.classList = "weather-data-cold";
+        pageBody.classList = "cold";
     }
 
     weatherDiv.appendChild(cityCountry);

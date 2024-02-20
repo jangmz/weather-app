@@ -6,4 +6,5 @@ searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log(`Submited: ${e.target.search.value}`);
     userLocationInput(e.target.search.value);
+    e.target.search.value = "";
 });

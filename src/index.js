@@ -35,9 +35,6 @@ function parseWeatherData(data) {
         data.current.wind_kph,
         data.current.wind_mph
         )
-
-    //console.log("Object created");
-    //console.log(weatherDataObj);
     
     return weatherDataObj;
 }
@@ -54,6 +51,7 @@ async function weatherFetch(location) {
 }
 
 export async function userLocationInput(location) {
+    // waits for the weather object to be returned and after that data is displayed to the pages
     displayWeatherData(await weatherFetch(location));
     console.log("Finished displaying");
 }
