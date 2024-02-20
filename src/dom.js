@@ -35,8 +35,8 @@ export function displayWeatherData(location) {
     // set text
     cityCountry.textContent = `${location.city} (${location.country})`;
     timeZone.textContent = location.timezone;
-    tempC.textContent = `Temperature: ${location.tempC}˚C`;
-    tempF.textContent = `Temperature: ${location.tempF}˚F`;
+    tempC.textContent = `${location.tempC}˚C`;
+    tempF.textContent = `${location.tempF}˚F`;
     conditionText.textContent = location.conditionText;
     icon.src = location.icon;
     uv.textContent = `UV index: ${location.uv}`;
@@ -46,6 +46,8 @@ export function displayWeatherData(location) {
     // set css classes
     if (location.tempC >= 20) {
         pageBody.classList = "hot-n-sunny";
+    } else if (location.tempC < 20 && location.tempC >= 15) {
+        pageBody.classList = "hot-n-cold";
     } else {
         pageBody.classList = "cold";
     }
