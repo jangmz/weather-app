@@ -105,3 +105,9 @@ body {
     grid-row: 4 / 5;
     justify-self: end;
 }
+
+#error-message {
+    color: red;
+    font-size: 40px;
+    font-weight: 700;
+}

@@ -65,7 +65,17 @@ export function displayWeatherData(location) {
 }
 
 export function displayError(error) {
-    console.log(error);
+    const weatherDiv = document.querySelector("#weather-data");
+    const message = document.createElement("div");
+
+    clearSubElements(weatherDiv);
+
+    message.classList = "error-message";
+    message.textContent = "The city you searched for doesn't exist! Please try again.";
+
+    weatherDiv.appendChild(message);
+
+    //console.log(error);
 }
 
 function clearSubElements(parentElement) {

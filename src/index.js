@@ -40,32 +40,21 @@ function parseWeatherData(data) {
 }
 
 async function weatherFetch(location) {
-    let weatherPromise, weatherJson;
-
-    // fetching api
     try {
-        weatherPromise = await fetch(`https://api.weatherapi.com/v1/current.json?key=fd8dc2d5fda54d06a95141222240102&q=${location}`, { mode: "cors" });
+        // fetching api
+        const weatherPromise = await fetch(`https://api.weatherapi.com/v1/current.json?key=fd8dc2d5fda54d06a95141222240102&q=${location}`, { mode: "cors" });
+
+        // getting json file
+        const weatherJson = await weatherPromise.json();
+        const weatherData = parseWeatherData(weatherJson);
+        
+        console.log(weatherData);
+        console.log("Finished fetching");
+
+        return weatherData;
     } catch(error) {
-        // call a function in dom.js and pass it the error so it can be displayed on the page
-        console.log(error);
         displayError(error);
     }
-
-    // getting json file
-    try {
-        weatherJson = await weatherPromise.json();
-    } catch(error) {
-        // call a function in dom.js and pass it the error so it can be displayed on the page
-        console.log(error);
-        displayError(error);
-    }
-    
-    const weatherData = parseWeatherData(weatherJson);
-    
-    console.log(weatherData);
-    console.log("Finished fetching");
-
-    return weatherData;
 }
 
 export async function userLocationInput(location) {
