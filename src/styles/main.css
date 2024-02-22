@@ -93,21 +93,34 @@ body {
     margin-bottom: 20px;
 }
 
-#uv {
+#humidity {
     grid-column: 4 / -1;
     grid-row: 3 / 4;
+    justify-self: end;
+}
+
+#uv {
+    grid-column: 4 / -1;
+    grid-row: 4 / 5;
     justify-self: end;
 }
 
 #windspeed-kmh,
 #windspeed-mph {
     grid-column: 4 / -1;
-    grid-row: 4 / 5;
+    grid-row: 5 / 6;
     justify-self: end;
 }
 
-#error-message {
-    color: red;
-    font-size: 40px;
+/* error message */
+
+.error-message {
+    color: rgb(219, 0, 0);
+    font-size: 25px;
     font-weight: 700;
+}
+
+body.error {
+    background-color: #ff7373;
+    background-image: #ff7373;
 }

@@ -41,25 +41,43 @@ function parseWeatherData(data) {
 
 async function weatherFetch(location) {
     try {
-        // fetching api
+        // fetching data
         const weatherPromise = await fetch(`https://api.weatherapi.com/v1/current.json?key=fd8dc2d5fda54d06a95141222240102&q=${location}`, { mode: "cors" });
 
-        // getting json file
-        const weatherJson = await weatherPromise.json();
-        const weatherData = parseWeatherData(weatherJson);
-        
-        console.log(weatherData);
-        console.log("Finished fetching");
+        if (!weatherPromise.ok) {
+            throw new Error("Failed to fetch data!");
+        } else {
+            // getting json file
+            const weatherJson = await weatherPromise.json();
+            const weatherData = parseWeatherData(weatherJson);
+            
+            console.log(weatherData);
+            console.log("Finished fetching");
 
-        return weatherData;
+            return weatherData;
+        }
     } catch(error) {
-        displayError(error);
+        console.error("Error: " + error.message);
+        displayError(error.message);
     }
 }
 
 export async function userLocationInput(location) {
     // waits for the weather object to be returned and after that data is displayed to the pages
-    displayWeatherData(await weatherFetch(location));
+    try {
+        const weatherData = await weatherFetch(location);
+
+        console.log(weatherData);
+
+        if (weatherData === undefined) {
+            throw new Error("This city does not exist!");
+        }
+
+        displayWeatherData(weatherData);
+    } catch (error) {
+        console.error("Error: " + error.message);
+        displayError(error.message);
+    }
     console.log("Finished displaying");
 }
 
@@ -87,7 +105,7 @@ export async function userLocationInput(location) {
 [] Optional: add a ‘loading’ component that displays from the time the form is 
     submitted until the information comes back from the API. Use DevTools to test 
     for low-end devices.
-[] handle errors (mistyped city names, or if city not found, wrong inputs,...)
+[x] handle errors (mistyped city names, or if city not found, wrong inputs,...)
 [] add gif regarding the weather
 
 */

@@ -19,6 +19,7 @@ export function displayWeatherData(location) {
     const tempF = document.createElement("div");
     const conditionText = document.createElement("div");
     const icon = document.createElement("img");
+    const humidity = document.createElement("div");
     const uv = document.createElement("div");
     const windSpeedK = document.createElement("div");
     const windSpeedM = document.createElement("div");
@@ -30,6 +31,7 @@ export function displayWeatherData(location) {
     tempF.id = "temp-f";
     conditionText.id = "conditions";
     icon.id = "icon";
+    humidity.id = "humidity";
     uv.id = "uv";
     windSpeedK.id = "windspeed-kmh";
     windSpeedM.id = "windspeed-mph";
@@ -41,6 +43,7 @@ export function displayWeatherData(location) {
     tempF.textContent = `${location.tempF}˚F`;
     conditionText.textContent = location.conditionText;
     icon.src = location.icon;
+    humidity.textContent = `Humidity: ${location.humidity}%`;
     uv.textContent = `UV index: ${location.uv}`;
     windSpeedK.textContent = `Wind speed: ${location.windSpeedKMH} km/h`;
     windSpeedM.textContent = `Wind speed: ${location.windSpeedMPH} m/h`;
@@ -60,22 +63,29 @@ export function displayWeatherData(location) {
     weatherDiv.appendChild(conditionText);
     weatherDiv.appendChild(icon);
     weatherDiv.appendChild(tempC);
+    weatherDiv.appendChild(humidity);
     weatherDiv.appendChild(uv);
     weatherDiv.appendChild(windSpeedK);
 }
 
-export function displayError(error) {
+export function displayError(errorMsg) {
+    const pageBody = document.body;
     const weatherDiv = document.querySelector("#weather-data");
     const message = document.createElement("div");
 
+    // change weather data div to visible
+    if (weatherDiv.style.display === "") {
+        weatherDiv.style.display = "grid"; // none
+    }
+
     clearSubElements(weatherDiv);
 
+    //pageBody.style.backgroundColor = "#ff7373";
+    pageBody.classList = "error";
     message.classList = "error-message";
-    message.textContent = "The city you searched for doesn't exist! Please try again.";
+    message.textContent = `Error: ${errorMsg} \nPlease, try again.`;
 
     weatherDiv.appendChild(message);
-
-    //console.log(error);
 }
 
 function clearSubElements(parentElement) {
