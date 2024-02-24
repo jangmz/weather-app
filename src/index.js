@@ -63,6 +63,10 @@ async function weatherFetch(location) {
 }
 
 export async function userLocationInput(location) {
+    const loadingDiv = document.querySelector("#loading");
+
+    loadingDiv.style.display = "block";
+
     // waits for the weather object to be returned and after that data is displayed to the pages
     try {
         const weatherData = await weatherFetch(location);
@@ -72,6 +76,8 @@ export async function userLocationInput(location) {
         if (weatherData === undefined) {
             throw new Error("This city does not exist!");
         }
+
+        loadingDiv.style.display = "";
 
         displayWeatherData(weatherData);
     } catch (error) {
