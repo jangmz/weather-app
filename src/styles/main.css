@@ -125,6 +125,12 @@ body.error {
     background-image: #ff7373;
 }
 
+/* gif */
+
+#gif {
+    display: none;
+}
+
 /* loading gif */
 
 #loading {

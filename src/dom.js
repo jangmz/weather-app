@@ -1,3 +1,6 @@
+import { fetchGif } from "./index.js";
+
+// displays all the weather information fetched
 export function displayWeatherData(location) {
     console.log(`Display weather data for: ${location}`);
 
@@ -66,11 +69,17 @@ export function displayWeatherData(location) {
     weatherDiv.appendChild(humidity);
     weatherDiv.appendChild(uv);
     weatherDiv.appendChild(windSpeedK);
+
+    // display apropriate gif
+    //console.log(pageBody.classList.value);
+    displayGif(pageBody.classList.value);
 }
 
+// displays error message
 export function displayError(errorMsg) {
     const pageBody = document.body;
     const weatherDiv = document.querySelector("#weather-data");
+    const gifDiv = document.querySelector("#gif");
     const message = document.createElement("div");
 
     // change weather data div to visible
@@ -79,6 +88,7 @@ export function displayError(errorMsg) {
     }
 
     clearSubElements(weatherDiv);
+    clearSubElements(gifDiv);
 
     //pageBody.style.backgroundColor = "#ff7373";
     pageBody.classList = "error";
@@ -86,10 +96,27 @@ export function displayError(errorMsg) {
     message.textContent = `Error: ${errorMsg} \nPlease, try again.`;
 
     weatherDiv.appendChild(message);
+
+    displayGif("error");
 }
 
+// clears all elements inside an element
 function clearSubElements(parentElement) {
     while (parentElement.firstChild) {
         parentElement.removeChild(parentElement.firstChild);
     }
 }  
+
+async function displayGif(gifName) {
+    const gifDiv = document.querySelector("#gif");
+    const gifImg = document.createElement("img");
+
+    clearSubElements(gifDiv);
+
+    gifImg.src = await fetchGif(gifName);
+    gifImg.alt = "gif";
+
+    gifDiv.appendChild(gifImg);
+
+    gifDiv.style.display = "block";
+}

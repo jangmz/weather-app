@@ -81,37 +81,26 @@ export async function userLocationInput(location) {
 
         displayWeatherData(weatherData);
     } catch (error) {
+        loadingDiv.style.display = "";
         console.error("Error: " + error.message);
-        displayError(error.message);
     }
     console.log("Finished displaying");
 }
 
-/*
+// fetches a gif and returns URL of the gif
+export async function fetchGif(query) {
+    try {
+        const response = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=ZgIwQmQDUIY1PVfPt7hyWL0eLYrTvxNh&s=${query}`, {mode: "cors"});
+        if (!response.ok) {
+            throw new Error("Cannot fetch data!");
+        }
+        
+        const gifData = await response.json();
+        //console.log(gifData.data.images.original.url);
+        const imageSource = gifData.data.images.original.url; 
 
-[x] Set up a blank HTML document with the appropriate links to your JavaScript and CSS files.
-[x] Write the functions that hit the API. You’re going to want functions that can 
-    take a location and return the weather data for that location. For now, just console.log() 
-    the information.
-[x] Write the functions that process the JSON data you’re getting from the API and return 
-    an object with only the data you require for your app.
-    Data needed: 
-        -Country, location
-        -timezone
-        -temperature in C and F
-        -humidity
-        -last updated
-        -uv index
-        -condition text & icon
-        -wind speed in kmh and mph
-[x] Set up a form that will let users input their location and will fetch the weather info 
-    (still just console.log() it).
-[x] Display the information on your webpage!
-[x] Add any styling you like!
-[] Optional: add a ‘loading’ component that displays from the time the form is 
-    submitted until the information comes back from the API. Use DevTools to test 
-    for low-end devices.
-[x] handle errors (mistyped city names, or if city not found, wrong inputs,...)
-[] add gif regarding the weather
-
-*/
+        return imageSource;
+    } catch (error) {
+        console.log(`Error occured: ${error}`);
+    }
+}
